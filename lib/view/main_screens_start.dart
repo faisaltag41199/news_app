@@ -18,7 +18,7 @@ class MainStart extends StatefulWidget {
 }
 
 class _MainStartState extends State<MainStart> {
-  bool hasConnection=false;
+  bool hasConnection=true;
   int _selectedIndex = 0;
   List<Widget> widgetOptionsList = [HomeView(), SearchView(), AccountView()];
 
