@@ -12,7 +12,7 @@ void main() async {
 }
 
 class NewsApi {
-  final String _apiKey = "99ee4a92a3c34d23abccf16571afdff8";
+  final String _apiKey = "aa1d8f8cfef34f8d83d0619b2d931ec1";
 
   Future<List<Article>?> fetchArticlesByCountry(String country) async {
     try {

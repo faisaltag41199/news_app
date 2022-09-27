@@ -8,8 +8,10 @@ import 'package:newsapp/main.dart';
 import 'package:newsapp/view/app_start.dart';
 import 'package:newsapp/view/authentication_screens/login_view.dart';
 import 'package:newsapp/view/category_screens/user_category_view.dart';
+import 'package:newsapp/view/main_screens_start.dart';
 import 'package:newsapp/view/reset_news_app_data.dart';
 import 'package:newsapp/viewmodel/Categories_viewmodel.dart';
+import 'package:newsapp/viewmodel/app_start_viewmodel.dart';
 import 'package:newsapp/viewmodel/login_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -181,8 +183,9 @@ class _AccountViewState extends State<AccountView> {
                                       color: Colors.black),
                                 ),
                                 onPressed: () {
+                                  Provider.of<AppStartViewModel>(context,listen: false).setupCheck=null;
                                   loginVM.logout();
-                                  Future.delayed(Duration(milliseconds: 150),
+                                  Future.delayed(Duration(milliseconds: 300),
                                       () {
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
@@ -301,7 +304,7 @@ class _AccountViewState extends State<AccountView> {
                                   Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => AppStart()),
+                                          builder: (context) => MainStart()),
                                       (route) => false);
                                 });
                               },

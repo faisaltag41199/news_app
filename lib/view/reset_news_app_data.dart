@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newsapp/main.dart';
 import 'package:newsapp/viewmodel/app_start_viewmodel.dart';
+import 'package:newsapp/viewmodel/login_viewmodel.dart';
 import 'package:newsapp/viewmodel/user_profile_model.dart';
 import 'package:provider/provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import '../model/services/database_helper.dart';
+import '../viewmodel/setup_category_viewmodel.dart';
 import 'app_start.dart';
 import 'loading_animations.dart';
 
@@ -45,6 +47,11 @@ class _ResetNewsAppDataState extends State<ResetNewsAppData> {
               : ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.red),
                   onPressed: () async {
+                    Provider.of<SetupCategoriesViewModel>(context,listen: false)
+                    .isAllSetupCategoriesMembersSetToEmpty=false;
+                    Provider.of<LoginViewModel>(context, listen: false).setIsLogged(false);
+                    Provider.of<AppStartViewModel>(context, listen: false)
+                        .setupCheck='false';
                     await databaseFactory
                         .deleteDatabase(
                             join(await getDatabasesPath(), 'newsapp.db'))
@@ -52,26 +59,29 @@ class _ResetNewsAppDataState extends State<ResetNewsAppData> {
                       String? userId = sharedpref!.getString('currentUser');
                       int? appId = sharedpref!.getInt('appId');
 
-                      /*    await sharedpref!.remove('setupCategories$appId');
+                      /*
                     await sharedpref!.remove('setupCategories$userId');
-                    await sharedpref!.remove('currentUser');
                     await sharedpref!.remove('appId');*/
-                      await sharedpref!.clear().whenComplete(() {
-                        Provider.of<AppStartViewModel>(context, listen: false)
-                            .setSetupCheckToNull();
-                        DatabaseHelper instance = DatabaseHelper.instance;
-                        instance.setDatabaseToNull();
-                        setState(() {
-                          showCircular = true;
-                        });
+                      await sharedpref!.remove('currentUser').whenComplete(()async{
+                        await sharedpref!.remove('setupCategories$appId').whenComplete(()async{
 
-                        Future.delayed(Duration(milliseconds: 300), () {
-                          print('database deleted');
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AppStart()),
-                              (route) => false);
+                          await sharedpref!.clear().whenComplete(() {
+                            DatabaseHelper instance = DatabaseHelper.instance;
+                            instance.setDatabaseToNull();
+                            setState(() {
+                              showCircular = true;
+                            });
+
+                            Future.delayed(Duration(milliseconds: 1000), () {
+                              print('database deleted');
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>NewsApp(fromRun: false,)),
+                                      (route) => false);
+                            });
+                          });
+
                         });
                       });
                     });

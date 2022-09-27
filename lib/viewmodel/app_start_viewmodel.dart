@@ -5,19 +5,22 @@ import '../main.dart';
 
 class AppStartViewModel extends ChangeNotifier{
 
-  String? setupCheck;
+  String? setupCheck=null;
 
 
 
    checkSetupCategories()async{
 
-    String? userId=  sharedpref!.getString('currentUser');
+    String? userId= sharedpref!.getString('currentUser');
     int? appId= sharedpref!.getInt('appId');
 
 
     if(userId==null){
 
       String? setupCheckInside= sharedpref!.getString('setupCategories$appId');
+      print(setupCheckInside);
+      print("setupCheckInside app ///////////////////////");
+
 
       if(setupCheckInside!=null){
 
@@ -32,7 +35,11 @@ class AppStartViewModel extends ChangeNotifier{
 
     }else{
 
-      String? setupCheckInside=  sharedpref!.getString('setupCategories$userId');
+
+      String? setupCheckInside = sharedpref!.getString('setupCategories$userId');
+      print(setupCheckInside);
+      print("setupCheckInside user ///////////////////////");
+
 
       if(setupCheckInside!=null){
 
@@ -49,10 +56,6 @@ class AppStartViewModel extends ChangeNotifier{
 
 
 
-  }
-
-  setSetupCheckToNull(){
-     setupCheck=null;
   }
 
 

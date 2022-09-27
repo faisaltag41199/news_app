@@ -26,54 +26,69 @@ import 'model/services/database_helper.dart';
 SharedPreferences? sharedpref;
 
 void main() async {
-  runApp(const MyApp());
+  runApp(const NewsApp(fromRun:true,));
 }
+
+class NewsApp extends StatelessWidget {
+
+  final fromRun;
+  const NewsApp({Key? key,required this.fromRun}) : super(key: key);
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    //initDatabase;
+    final db=DatabaseHelper.instance.database;
+
+    //run app first time
+    if(fromRun){
+
+      return MyApp();
+
+    }else{
+
+      //after delete all data return user to setup app categories
+      setSharedpref();
+      setAppId();
+      setCountry();
+      setCountryCode();
+      setArticleLanguage();
+
+      return Consumer<SetupCategoriesViewModel>(builder: (context,SetupCategoriesVM,child){
+
+        if(SetupCategoriesVM.isAllSetupCategoriesMembersSetToEmpty==true){
+
+          return SetupAppCategories();
+        }else{
+
+          Future.delayed(Duration(milliseconds:200),(){
+            SetupCategoriesVM.setAllSetupCategoriesMembersToEmpty();
+          });
+          return Container(height: 300,width: 300,child:
+          Scaffold(backgroundColor:Colors.white,body:
+          Center(child:CircularProgressIndicator(color: Colors.black,) ,),),);
+        }
+
+      });
+
+      /*MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'news cloud',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home:SetupAppCategories(),
+      );*/
+    }
+  }
+
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  setSharedpref() async {
-    sharedpref = await SharedPreferences.getInstance();
-  }
-
-  setAppId() async {
-    SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
-
-    if (sharedPrefInside.getInt('appId') == null) {
-      print('in get app id');
-      DatabaseHelper instance = DatabaseHelper.instance;
-      Database? db = await instance.database;
-      List raw = await db!
-          .query('user', where: "email = ?", whereArgs: ['newsapp@news.com']);
-      Map appAsUserData = raw[0];
-      await sharedPrefInside.setInt('appId', appAsUserData['userId']);
-      print(appAsUserData['userId']);
-    } else {
-      print(sharedPrefInside.getInt('appId'));
-      print('already exist app id');
-    }
-  }
-
-  setCountry() async {
-    SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
-    if (sharedPrefInside.getString('country') == null) {
-      sharedPrefInside.setString('country', 'egypt');
-    }
-  }
-
-  setCountryCode() async {
-    SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
-    if (sharedPrefInside.getString('countryCode') == null) {
-      sharedPrefInside.setString('countryCode', 'eg');
-    }
-  }
-
-  setArticleLanguage() async {
-    SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
-    if (sharedPrefInside.getString('ArticleLanguage') == null) {
-      sharedPrefInside.setString('ArticleLanguage', 'ar');
-    }
-  }
 
   // This widget is the root of your application.
   @override
@@ -109,7 +124,52 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home:AppStart(),
-      ),
+      )
     );
   }
 }
+
+setSharedpref() async {
+  sharedpref = await SharedPreferences.getInstance();
+}
+
+setAppId() async {
+  SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
+
+  if (sharedPrefInside.getInt('appId') == null) {
+    print('in get app id');
+    DatabaseHelper instance = DatabaseHelper.instance;
+    Database? db = await instance.database;
+    List raw = await db!
+        .query('user', where: "email = ?", whereArgs: ['newsapp@news.com']);
+    Map appAsUserData = raw[0];
+    await sharedPrefInside.setInt('appId', appAsUserData['userId']);
+    print(appAsUserData['userId']);
+  } else {
+    print(sharedPrefInside.getInt('appId'));
+    print('already exist app id');
+  }
+}
+
+setCountry() async {
+  SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
+  if (sharedPrefInside.getString('country') == null) {
+    sharedPrefInside.setString('country', 'egypt');
+  }
+}
+
+setCountryCode() async {
+  SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
+  if (sharedPrefInside.getString('countryCode') == null) {
+    sharedPrefInside.setString('countryCode', 'eg');
+  }
+}
+
+setArticleLanguage() async {
+  SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
+  if (sharedPrefInside.getString('ArticleLanguage') == null) {
+    sharedPrefInside.setString('ArticleLanguage', 'ar');
+  }
+}
+
+

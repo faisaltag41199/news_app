@@ -26,54 +26,17 @@ class AppStart extends StatefulWidget {
 
 class _AppStartState extends State<AppStart> {
 
-  setAppId() async {
-    SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
-
-    if (sharedPrefInside.getInt('appId') == null) {
-      print('in get app id');
-      DatabaseHelper instance = DatabaseHelper.instance;
-      Database? db = await instance.database;
-      List raw = await db!
-          .query('user', where: "email = ?", whereArgs: ['newsapp@news.com']);
-      Map appAsUserData = raw[0];
-      await sharedPrefInside.setInt('appId', appAsUserData['userId']);
-      print(appAsUserData['userId']);
-    } else {
-      print(sharedPrefInside.getInt('appId'));
-      print('already exist app id');
-    }
-  }
-
-  setCountryCode() async {
-    SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
-    if (sharedPrefInside.getString('countryCode') == null) {
-      sharedPrefInside.setString('countryCode', 'eg');
-    }
-  }
-
-  setCountry() async {
-    SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
-    if (sharedPrefInside.getString('country') == null) {
-      sharedPrefInside.setString('country', 'egypt');
-    }
-  }
-
-  setArticleLanguage() async {
-    SharedPreferences sharedPrefInside = await SharedPreferences.getInstance();
-    if (sharedPrefInside.getString('ArticleLanguage') == null) {
-      sharedPrefInside.setString('ArticleLanguage', 'ar');
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-
+   Provider.of<AppStartViewModel>(context,listen: false).setupCheck=null;
 
   }
 
   @override
   Widget build(BuildContext context) {
+
+
     setAppId();
     setCountry();
     setCountryCode();
@@ -81,7 +44,7 @@ class _AppStartState extends State<AppStart> {
 
     if (Provider.of<AppStartViewModel>(context, listen: false).setupCheck ==
         null)
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds:2), () {
         Provider.of<AppStartViewModel>(context, listen: false)
             .checkSetupCategories();
 
@@ -95,7 +58,7 @@ class _AppStartState extends State<AppStart> {
       });
 
     return Consumer<AppStartViewModel>(builder: (context, appStartVM, child) {
-      if (appStartVM.setupCheck == 'true') {
+      if (appStartVM.setupCheck =='true') {
         print('true2');
 
         Provider.of<CategoriesViewModel>(context, listen: false)

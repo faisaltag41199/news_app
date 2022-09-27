@@ -10,6 +10,7 @@ class SetupCategoriesViewModel extends ChangeNotifier{
   int numOfFollowedCategories=0;
   int setupComplete =0;
   List<ArticleCategory> listOfSetupCategoris=[];
+  bool? isAllSetupCategoriesMembersSetToEmpty=false;
 
   DatabaseHelper instance=DatabaseHelper.instance;
 
@@ -19,6 +20,9 @@ class SetupCategoriesViewModel extends ChangeNotifier{
     numOfFollowedCategories=0;
     setupComplete=0;
     listOfSetupCategoris=[];
+    isAllSetupCategoriesMembersSetToEmpty=true;
+     notifyListeners();
+
   }
   void increase(){
 

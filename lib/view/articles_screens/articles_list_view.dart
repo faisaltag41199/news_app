@@ -270,15 +270,25 @@ class _ArticlesListCustomWidgetState extends State<ArticlesListCustomWidget> {
             builder: (context, articleListViewModel, _) {
           articleListViewModel.fetchArticlesByCountry(
               sharedpref!.getString('countryCode') == null
-                  ? 'eg'
-                  : (sharedpref!.getString('countryCode'))!);
+                  ?'eg'
+                  :(sharedpref!.getString('countryCode'))!);
 
           if (articleListViewModel.articlesList.isEmpty ||
               articleListViewModel.startCountry['top'] !=
                   sharedpref!.getString('country')) {
             Future.delayed(Duration(milliseconds: 100), () {
-              articleListViewModel.startCountry['top'] =
-                  (sharedpref!.getString('country'))!;
+
+              if(sharedpref!.getString('country')==null){
+
+                articleListViewModel.startCountry['top']='egypt';
+                sharedpref!.setString('countryCode','eg');
+                sharedpref!.setString('country','egypt');
+
+              }else{
+
+                articleListViewModel.startCountry['top'] =
+                (sharedpref!.getString('country'))!;
+              }
 
               articleListViewModel.fetchArticlesByCountry(
                   sharedpref!.getString('countryCode') == null

@@ -248,10 +248,12 @@ class _SignupViewState extends State<SignupView> {
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snakbar);
                         } else {
+
                           await Provider.of<SignupViewModel>(context,
                                   listen: false)
                               .signup(_fullName, _email, _password)
                               .then((value) {
+                            Navigator.of(context).pop();
                             print(value);
                             Provider.of<SetupCategoriesViewModel>(context,
                                     listen: false)
@@ -260,7 +262,7 @@ class _SignupViewState extends State<SignupView> {
                                 .setIsLogged(true);
 
                             sharedpref!
-                                .setString('currentUser', value!.toString());
+                                .setString('currentUser',value!.toString());
                             Future.delayed(Duration(milliseconds: 200), () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
@@ -300,7 +302,7 @@ class _SignupViewState extends State<SignupView> {
   Future<void> _showMyDialog() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,

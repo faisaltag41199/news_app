@@ -63,8 +63,7 @@ class _SetupAppCategoriesState extends State<SetupAppCategories> {
               if (categoriesViewModel.tabBarControllerLength >=
                       (categoriesViewModel.idsList.length) + 1 &&
                   categoriesViewModel.idsList.length >= 1) {
-                print(
-                    'in home starter  tabcontroller lenth ${categoriesViewModel.tabBarControllerLength}');
+                print('in home starter  tabcontroller lenth ${categoriesViewModel.tabBarControllerLength}');
 
                 Provider.of<UserProfileViewModel>(context, listen: false)
                     .fetchUserData();
@@ -264,6 +263,7 @@ class _SetupAppCategoriesState extends State<SetupAppCategories> {
                               setupCategoriesViewModel
                                   .saveAppSetupCategories(appId);
                             } else {
+                              print('in setup app Categories because app id = null ');
                               DatabaseHelper instance = DatabaseHelper.instance;
                               Database? db = await instance.database;
                               List raw = await db!.query('user',
@@ -273,6 +273,7 @@ class _SetupAppCategoriesState extends State<SetupAppCategories> {
                               sharedpref!
                                   .setInt('appId', appAsUserData['userId']);
                               print(appAsUserData['userId']);
+                              print(' user id in setup app Categories because app id = null');
                               sharedpref!
                                   .setString(
                                       'setupCategories${appAsUserData['userId']}',
