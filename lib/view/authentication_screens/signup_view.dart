@@ -253,7 +253,6 @@ class _SignupViewState extends State<SignupView> {
                                   listen: false)
                               .signup(_fullName, _email, _password)
                               .then((value) {
-                            Navigator.of(context).pop();
                             print(value);
                             Provider.of<SetupCategoriesViewModel>(context,
                                     listen: false)
@@ -263,7 +262,7 @@ class _SignupViewState extends State<SignupView> {
 
                             sharedpref!
                                 .setString('currentUser',value!.toString());
-                            Future.delayed(Duration(milliseconds: 200), () {
+                            Future.delayed(Duration(milliseconds: 500), () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
                                       builder: (context) =>

@@ -245,8 +245,7 @@ class _SetupAppCategoriesState extends State<SetupAppCategories> {
                         print(
                             '${sharedpref!.getInt('appId')} in elevated button app id is found');
 
-                        String? userId =
-                            await sharedpref!.getString('currentUser');
+                        String? userId = await sharedpref!.getString('currentUser');
                         int? appId = await sharedpref!.getInt('appId');
 
                         print('in elvated button');
@@ -259,7 +258,7 @@ class _SetupAppCategoriesState extends State<SetupAppCategories> {
                             print(' in elvated button in savesetupCategories');
                             if (appId != null) {
                               sharedpref!
-                                  .setString('setupCategories$appId', 'true');
+                                  .setString('setupCategories$appId','true');
                               setupCategoriesViewModel
                                   .saveAppSetupCategories(appId);
                             } else {
@@ -280,8 +279,7 @@ class _SetupAppCategoriesState extends State<SetupAppCategories> {
                                       'true')
                                   .whenComplete(() {
                                 setupCategoriesViewModel.saveAppSetupCategories(
-                                    appAsUserData['userId']);
-                              });
+                                    (appAsUserData['userId'])!);});
                             }
                           } else {
                             //after signup getstarted

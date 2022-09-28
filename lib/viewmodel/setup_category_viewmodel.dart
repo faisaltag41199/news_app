@@ -59,7 +59,7 @@ class SetupCategoriesViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  saveAppSetupCategories(int? appId) async {
+  saveAppSetupCategories(int appId) async {
    Database? db= await instance.database;
 
 

@@ -36,10 +36,10 @@ class DatabaseHelper {
           )
           ''');
 
-      await db.insert('user', {
-        'fullName': 'newsapp',
-        'email': 'newsapp@news.com',
-        'password': 'news1234'
+      await db.insert('user',{
+        'fullName':'newsapp',
+        'email':'newsapp@news.com',
+        'password':'news1234'
       });
 
       await db.execute('''

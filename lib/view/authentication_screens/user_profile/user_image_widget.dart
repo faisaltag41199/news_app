@@ -89,8 +89,7 @@ class UserImage extends StatelessWidget {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.of(context)
-                                      .pop(); //close bottom sheet
+                                  //close bottom sheet
                                   Provider.of<UserProfileViewModel>(context,
                                           listen: false)
                                       .changeIsDeleteImageRunning(true);

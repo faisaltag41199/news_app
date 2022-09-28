@@ -40,7 +40,6 @@ class NewsApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     //initDatabase;
-    final db=DatabaseHelper.instance.database;
 
     //run app first time
     if(fromRun){
@@ -50,6 +49,7 @@ class NewsApp extends StatelessWidget {
     }else{
 
       //after delete all data return user to setup app categories
+      initDatabase();
       setSharedpref();
       setAppId();
       setCountry();
@@ -63,8 +63,10 @@ class NewsApp extends StatelessWidget {
           return SetupAppCategories();
         }else{
 
-          Future.delayed(Duration(milliseconds:200),(){
-            SetupCategoriesVM.setAllSetupCategoriesMembersToEmpty();
+          Future.delayed(Duration(seconds: 5),(){
+
+             SetupCategoriesVM.setAllSetupCategoriesMembersToEmpty();
+
           });
           return Container(height: 300,width: 300,child:
           Scaffold(backgroundColor:Colors.white,body:
@@ -127,6 +129,10 @@ class MyApp extends StatelessWidget {
       )
     );
   }
+}
+
+initDatabase()async{
+  final db=await DatabaseHelper.instance.database;
 }
 
 setSharedpref() async {
