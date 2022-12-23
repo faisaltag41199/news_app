@@ -1,6 +1,6 @@
 # newsapp
 
-A new Flutter project(mobile android).
+A new Flutter project(mobile android - ios).
 
 ## Getting Started
 
