@@ -1,16 +1,24 @@
 # newsapp
 
-A new Flutter project(mobile android - ios).
+Flutter application that disply news articles from all around the world and deliver it to user
+as fast as possible in best visualize way.
 
-## Getting Started
+# Features
 
-This project is a starting point for a Flutter application.
+* user authentication (log in with email and password - log out) .
+* manage user account .
+* display news articles retrieved related to a specific category from news api.
+* select / deselect favourite categories.
+* search for articles
 
-A few resources to get you started if this is your first Flutter project:
+# What I Learned
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* How to use flutter widgets to build the UI of the application.
+* How to use dart and flutter to develop the product that meets the requirements.
+* How to use Http package to fetch arctiles from API . 
+* How to use Provider State Management .
+* How to apply MVVM architecture pattern .
+* How to use Flutter to do infinite scroll .
+* How to use local database (sqflite) 
+  - store and retrieve data of a user
+  - local authentication(login with email and password - log out)
