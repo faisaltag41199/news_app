@@ -22,3 +22,4 @@ as fast as possible in best visualize way.
 * How to use local database (sqflite) 
   - store and retrieve data of a user
   - local authentication(login with email and password - log out)
+* How to add lottie animations.
