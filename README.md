@@ -38,6 +38,5 @@ as fast as possible in best visualize way.
 ![WhatsApp10 Image 2023-08-03 at 7 10 30 PM (2)](https://github.com/faisaltag41199/news_app/assets/77741453/3f9130be-61fa-4619-8d8b-328eb809c3a8)
 ![WhatsApp11 Image 2023-08-03 at 7 10 31 PM](https://github.com/faisaltag41199/news_app/assets/77741453/a713982a-21f8-4249-a2eb-f945cf628479)
 ![WhatsApp12 Image 2023-08-03 at 7 10 31 PM (1)](https://github.com/faisaltag41199/news_app/assets/77741453/010f5357-5565-43c0-96f3-74efa2fc6d34)
-![WhatsApp13 Image 2023-08-03 at 7 10 31 PM (2)](https://github.com/faisaltag41199/news_app/assets/77741453/99ab4e21-9f8b-4987
+![WhatsApp13 Image 2023-08-03 at 7 10 31 PM (2)](https://github.com/faisaltag41199/news_app/assets/77741453/99ab4e21-9f8b-4987-80a2-45b9cdc59bf3)
 ![WhatsApp14 Image 2023-08-03 at 7 10 32 PM](https://github.com/faisaltag41199/news_app/assets/77741453/e26bd52c-2e6e-4da6-ac3c-101d158cccc5)
--80a2-45b9cdc59bf3)
